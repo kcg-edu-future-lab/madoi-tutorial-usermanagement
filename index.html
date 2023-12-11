@@ -58,15 +58,13 @@ window.addEventListener("load", ()=>{
     });
 
     // ルームに他のユーザが入出した際の処理を登録する。
-    m.addEventListener("peerEntered", ({detail})=>{
-        const {peer} = detail;
-        logDiv.innerHTML += `[${peer.id} が入室しました。]<br/>`;
+    m.addEventListener("peerEntered", ({detail: {peer: {id}}})=>{
+        logDiv.innerHTML += `[${id} が入室しました。]<br/>`;
         logDiv.scrollTop = logDiv.scrollHeight;
     });
 
     // ルームから他のユーザが退出した際の処理を登録する。
-    m.addEventListener("peerLeaved", peerId=>{
-        const {peer} = detail;
+    m.addEventListener("peerLeaved", ({detail: {peerId}})=>{
         logDiv.innerHTML += `[${peerId} が退室しました。]<br/>`;
         logDiv.scrollTop = logDiv.scrollHeight;
     });
